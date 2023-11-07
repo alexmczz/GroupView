@@ -12,6 +12,14 @@
 .LINK
     GitHub: https://github.com/alexmczz/GroupView
 #>
+function instructions() {
+    Write-Host "How to use this program" -ForegroundColor Red
+    Write-Host "To view list of options type: 'list'" -ForegroundColor Yellow
+    Write-Host "To go back a menu type: 'exit'" -ForegroundColor Yellow
+    Write-Host "To quit application just type 'exit' until exited or ctr-c" -ForegroundColor Yellow
+    Write-Host "If the terminal is too cluttered type: 'clear'" -ForegroundColor Yellow
+    Write-Host "To view this screen again type: 'help'" -ForegroundColor Green
+}
 
 function domain_groups() {
     while ($true) {
@@ -21,6 +29,8 @@ function domain_groups() {
             break
         } elseif ($group_name -eq "clear") {
             Clear-Host
+        } elseif ($group_name -eq "help") {
+            instructions
         } else {
             Write-Host "********************************************************************************"
             Get-ADGroupMember -Identity $group_name
@@ -37,6 +47,8 @@ function local_groups() {
             break
         } elseif ($group_name -eq "clear") {
             Clear-Host
+        } elseif ($group_name -eq "help") {
+            instructions
         } else {
             Write-Host "********************************************************************************"
             Get-LocalGroupMember -Group $group_name
@@ -45,14 +57,6 @@ function local_groups() {
     }
 }
 
-function instructions() {
-    Write-Host "How to use this program" -ForegroundColor Red
-    Write-Host "To view list of options type: 'list'" -ForegroundColor Yellow
-    Write-Host "To go back a menu type: 'exit'" -ForegroundColor Yellow
-    Write-Host "To quit application just type 'exit' until exited or ctr-c" -ForegroundColor Yellow
-    Write-Host "If the terminal is too cluttered type: 'clear'" -ForegroundColor Yellow
-    Write-Host "To view this screen again type: 'help'" -ForegroundColor Green
-}
 
 function group_view() {
     instructions
