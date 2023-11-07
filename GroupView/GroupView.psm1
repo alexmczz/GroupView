@@ -31,6 +31,8 @@ function domain_groups() {
             Clear-Host
         } elseif ($group_name -eq "help") {
             instructions
+        } elseif ($group_name -eq "list") {
+            Get-ADGroupMember -Identity *
         } else {
             Write-Host "********************************************************************************"
             Get-ADGroupMember -Identity $group_name
@@ -49,6 +51,8 @@ function local_groups() {
             Clear-Host
         } elseif ($group_name -eq "help") {
             instructions
+        } elseif ($group_name -eq "list") {
+            Get-LocalGroupMember -Group *
         } else {
             Write-Host "********************************************************************************"
             Get-LocalGroupMember -Group $group_name
