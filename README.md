@@ -27,6 +27,7 @@ Choose Group Type: Choose the desired group type (Domain or Local) and follow th
 
 # Notes
 **Author:** Alex McPadden
+
 **Disclaimer:** This script is provided as-is without any warranty. The author is not responsible for any potential damages or issues caused by the use of this script. Users are advised to test the script in non-production environments before using it in a production setting.
 
 ## About This Document
