@@ -1,25 +1,19 @@
-﻿<#
+<#
 .SYNOPSIS
-    This script Allows users to view local or domain user group members.
+    This script allows the user to view users in specified usergroup.
 
 .DESCRIPTION
-    when this script is run, the user has the option to list and view local or domain groups and members of the specified groups.
+    The script will allow the user to view either domain or local group users after specified
 
 .NOTES
     Author: Alex McPadden
     Disclaimer: This script is provided as-is without any warranty. The author is not responsible for any potential damages or issues caused by the use of this script. Users are advised to test the script in non-production environments before using it in a production setting.
 
 .LINK
-    GitHub: https://github.com/alexmczz/GroupView
+    GitHub: https://github.com/alexmczz/group_view
+
 #>
-function instructions() {
-    Write-Host "How to use this program" -ForegroundColor Red
-    Write-Host "To view list of options type: 'list'" -ForegroundColor Yellow
-    Write-Host "To go back a menu type: 'exit'" -ForegroundColor Yellow
-    Write-Host "To quit application just type 'exit' until exited or ctr-c" -ForegroundColor Yellow
-    Write-Host "If the terminal is too cluttered type: 'clear'" -ForegroundColor Yellow
-    Write-Host "To view this screen again type: 'help'" -ForegroundColor Green
-}
+
 
 function domain_groups() {
     while ($true) {
@@ -29,13 +23,13 @@ function domain_groups() {
             break
         } elseif ($group_name -eq "clear") {
             Clear-Host
-        } elseif ($group_name -eq "help") {
+        } elseif ($res -eq "help") {
             instructions
         } elseif ($group_name -eq "list") {
-            Get-ADGroupMember -Identity *
+            net group /domain
         } else {
             Write-Host "********************************************************************************"
-            Get-ADGroupMember -Identity $group_name
+            net group $group_name /domain
             Write-Host "********************************************************************************"
         }
     }
@@ -49,18 +43,26 @@ function local_groups() {
             break
         } elseif ($group_name -eq "clear") {
             Clear-Host
-        } elseif ($group_name -eq "help") {
+        } elseif ($res -eq "help") {
             instructions
         } elseif ($group_name -eq "list") {
-            Get-LocalGroupMember -Group *
+            net localgroup
         } else {
             Write-Host "********************************************************************************"
-            Get-LocalGroupMember -Group $group_name
+            net localgroup $group_name
             Write-Host "********************************************************************************"
         }
     }
 }
 
+function instructions() {
+    Write-Host "How to use this program" -ForegroundColor Red
+    Write-Host "To view list of options type: 'list'" -ForegroundColor Yellow
+    Write-Host "To go back a menu type: 'exit'" -ForegroundColor Yellow
+    Write-Host "To quit application just type 'exit' until exited or ctr-c" -ForegroundColor Yellow
+    Write-Host "If the terminal is too cluttered type: 'clear'" -ForegroundColor Yellow
+    Write-Host "To view this screen again type: 'help'" -ForegroundColor Green
+}
 
 function group_view() {
     instructions
@@ -84,4 +86,5 @@ function group_view() {
     }
 }
 
+Export-ModuleMember -Function * -Alias *
 group_view
